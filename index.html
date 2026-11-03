@@ -5499,10 +5499,24 @@ version 0.6.9
     return { group, surface, B, wpos, pose, floor0, lowestToe, U: surface.material.uniforms };
   }
 
+  // ---------- one WebGL renderer for every panel ----------
+  // Browsers cap how many WebGL canvases a page keeps alive (fewer on Chromebooks) and drop the oldest past that,
+  // which left some panels blank once the report tours opened their own 3D views. All the deck's panels draw
+  // through this one hidden renderer and copy the picture into their own plain canvas.
+  let shared = null;
+  const sharedRenderer = () => {
+    if (shared) return shared;
+    const c = document.createElement('canvas');
+    shared = new THREE.WebGLRenderer({ canvas: c, antialias: true, alpha: true, preserveDrawingBuffer: true });
+    shared.setPixelRatio(1);
+    c.addEventListener('webglcontextlost', e => e.preventDefault());   // let the browser hand it back
+    return shared;
+  };
+
   // ---------- one panel: WebGL figure + a 2D force trace beside it ----------
   function makeView(el, opts) {
     const cv = el.querySelector('.fig3d'), tr = el.querySelector('.trace');
-    const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true, preserveDrawingBuffer: true });
+    const renderer = sharedRenderer(), g3 = cv.getContext('2d');
     const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(opts.fov, 1, 0.05, 40);
     const body = makeBody(scene);
     const v = { el, renderer, scene, camera, body, ...opts };
@@ -5510,8 +5524,8 @@ version 0.6.9
     v.fit = () => {
       const w = el.offsetWidth, h = el.offsetHeight;   // stage pixels: the deck scales the whole stage
       v.stacked = w < h * 1.2;   // narrow panel: trace along the bottom instead of beside the figure
-      renderer.setPixelRatio(Math.min(2, (window.devicePixelRatio || 1) * (el.getBoundingClientRect().width / w || 1)));
-      renderer.setSize(w, h, false);
+      const pr = Math.min(2, (window.devicePixelRatio || 1) * (el.getBoundingClientRect().width / w || 1));
+      cv.width = Math.max(1, Math.round(w * pr)); cv.height = Math.max(1, Math.round(h * pr));
       camera.aspect = w / h; camera.zoom = v.stacked ? opts.stackZoom || 1 : 1;
       if (opts.trace === false) camera.clearViewOffset();             // no trace: figure centered
       else if (v.stacked) camera.setViewOffset(w, h, 0, h * 0.15, w, h);   // figure up, trace below
@@ -5520,7 +5534,10 @@ version 0.6.9
     };
     v.render = t => {
       opts.frame(v, t);
+      if (renderer.domElement.width !== cv.width || renderer.domElement.height !== cv.height) renderer.setSize(cv.width, cv.height, false);
       renderer.render(scene, camera);
+      g3.clearRect(0, 0, cv.width, cv.height);
+      g3.drawImage(renderer.domElement, 0, 0);
       // trace: right part (or bottom strip) of the panel, everything up to t
       const g = tr.getContext('2d'), W = tr.width, H = tr.height;
       g.clearRect(0, 0, W, H);
@@ -6791,7 +6808,8 @@ function softballReplayPlayer(D, ROOT, OPT) {
 // ── Start each excerpt's 3D player: dark scene for the room, full screen kept inside the slide ──
 (function players() {
   const OPT = { bg: 0x121315, grid1: 0x3a3d42, grid2: 0x26292d, center: 0xb8bcc2, inline: true, maxPr: 2 };
-  const hosts = [...document.querySelectorAll('[data-player]')];
+  // players kept only for their data (inside a hidden block) never start: each would hold a WebGL canvas
+  const hosts = [...document.querySelectorAll('[data-player]')].filter(h => !h.closest('[hidden]'));
   hosts.forEach(host => {
     const fn = window[host.dataset.player];
     if (typeof fn !== 'function' || typeof THREE === 'undefined') return;
