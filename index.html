@@ -5363,7 +5363,9 @@ version 0.6.9
 (function forceFigures() {
   const slide = document.getElementById('force-slide'), idea = document.getElementById('idea-slide');
   if (!slide && !idea || typeof THREE === 'undefined' || !THREE.FBXLoader || !window.__XBOT) return;
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // The loops play even where the device asks for reduced motion (Dave 2026-11-03: managed Chromebooks showed them
+  // frozen); they're slow figures that are the point of the slide. Add ?still to the address to get stills.
+  const reduce = /[?&]still/.test(location.search);
   const decode = b64 => { const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u.buffer; };
   const model = decode(window.__XBOT);
   const ss = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
