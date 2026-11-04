@@ -238,6 +238,12 @@ p, li { font-size: 48px; line-height: 1.3; color: var(--ink); }
 .qr svg { width: 380px; height: 380px; display: block; border-radius: 16px; }
 .qr p { font: 600 30px 'Barlow', sans-serif; color: var(--ink); margin-top: 22px; }
 .qr span { font-size: 20px; color: var(--muted); }
+.cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px 80px; margin-top: 56px; }
+.cost-grid .amt { font: 700 76px/1.1 'Barlow', sans-serif; color: var(--ink); margin-top: 22px; }
+.cost-grid .amt.a { color: var(--accent); }
+.cost-grid h3 { font-size: 38px; margin-top: 10px; }
+.cost-grid p { font-size: 30px; color: var(--muted); margin-top: 6px; }
+.slide.contact-slide h2:first-of-type { font-size: 68px; max-width: 1120px; }
 .slide.facility { justify-content: flex-start; padding-top: 72px; padding-bottom: 48px; }
 .slide.facility h2 { font-size: 64px; }
 .slide.facility .skel { margin-top: 28px; flex-wrap: wrap; }
@@ -1097,18 +1103,30 @@ body.blanked .blank { display: block; }
 </section>
 
 <!-- 16 · Referral and contact -->
+<!-- Cost and timing (Dave 2026-11-04) -->
+<section class="slide cost" data-title="Cost and timing">
+  <div class="kicker rv">Cost and timing</div>
+  <h2 class="rv">Self-pay, <span class="a">with reports the same day.</span></h2>
+  <div class="cost-grid rv">
+    <div class="col"><div class="line"></div><div class="amt">$249–$349</div><h3>Assessment and exercise programming</h3></div>
+    <div class="col"><div class="line"></div><div class="amt">$120</div><h3>Training session</h3></div>
+    <div class="col"><div class="line"></div><div class="amt a">Same day</div><h3>Reports</h3><p>Immediate, and sent out that day.</p></div>
+    <div class="col"><div class="line"></div><div class="amt a">Within 1 business day</div><h3>Exercise programming</h3></div>
+  </div>
+</section>
+
 <section class="slide contact-slide" data-title="Contact">
   <div class="qr rv"><svg xmlns="http://www.w3.org/2000/svg" width="370" height="370" class="segno"><g transform="scale(10)"><path fill="#fff" d="M0 0h37v37h-37z"/><path class="qrline" stroke="#000" d="M2 2.5h7m7 0h2m2 0h2m2 0h2m2 0h7m-33 1h1m5 0h1m2 0h2m3 0h3m4 0h3m2 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m2 0h4m1 0h2m1 0h4m1 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h1m7 0h3m1 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m3 0h6m2 0h1m1 0h1m2 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h4m3 0h5m2 0h1m1 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-24 1h4m1 0h1m1 0h3m1 0h2m-22 1h1m2 0h1m1 0h2m1 0h1m3 0h3m1 0h1m4 0h1m1 0h1m1 0h1m1 0h1m-28 1h1m1 0h1m1 0h2m4 0h1m1 0h1m4 0h2m1 0h1m1 0h1m1 0h4m4 0h1m-32 1h1m2 0h1m1 0h2m1 0h1m2 0h1m3 0h2m1 0h4m4 0h2m1 0h1m1 0h1m-31 1h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2m3 0h4m4 0h2m1 0h2m-32 1h1m4 0h2m1 0h1m1 0h1m2 0h1m1 0h2m2 0h2m3 0h2m2 0h1m-30 1h1m1 0h1m4 0h1m3 0h3m3 0h1m1 0h3m2 0h1m1 0h3m2 0h2m-32 1h4m1 0h2m8 0h1m1 0h1m2 0h3m1 0h3m2 0h2m-32 1h1m1 0h3m2 0h1m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h2m1 0h1m1 0h1m2 0h1m-32 1h1m1 0h2m1 0h4m3 0h4m1 0h1m1 0h1m1 0h3m2 0h1m1 0h1m2 0h1m-29 1h1m1 0h1m3 0h2m1 0h1m1 0h1m1 0h2m3 0h5m1 0h1m1 0h1m1 0h1m-32 1h1m1 0h1m3 0h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h2m1 0h2m4 0h3m-31 1h1m1 0h2m1 0h1m5 0h2m1 0h3m1 0h3m2 0h1m1 0h1m-28 1h1m1 0h1m3 0h1m2 0h1m2 0h1m3 0h1m3 0h2m1 0h3m5 0h1m-27 1h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m2 0h2m2 0h1m1 0h2m-33 1h5m1 0h1m4 0h1m1 0h2m1 0h1m2 0h1m2 0h1m1 0h1m2 0h1m4 0h1m-32 1h2m2 0h1m1 0h1m1 0h4m1 0h2m2 0h2m1 0h1m1 0h1m2 0h3m2 0h1m-32 1h1m1 0h5m2 0h1m1 0h2m1 0h1m1 0h2m1 0h3m2 0h5m2 0h1m-24 1h1m1 0h3m1 0h1m2 0h1m1 0h3m2 0h1m3 0h2m1 0h2m-33 1h7m4 0h1m1 0h1m2 0h1m1 0h1m5 0h1m1 0h1m1 0h4m-32 1h1m5 0h1m1 0h1m4 0h1m2 0h2m1 0h1m1 0h1m2 0h1m3 0h1m-29 1h1m1 0h3m1 0h1m2 0h4m2 0h1m1 0h1m1 0h4m1 0h6m1 0h1m-32 1h1m1 0h3m1 0h1m1 0h2m6 0h1m3 0h5m1 0h1m1 0h3m-31 1h1m1 0h3m1 0h1m4 0h1m2 0h1m3 0h1m2 0h3m4 0h1m3 0h1m-33 1h1m5 0h1m2 0h1m2 0h4m1 0h3m1 0h1m2 0h3m-27 1h7m1 0h1m1 0h2m3 0h2m3 0h2m2 0h3m1 0h2m1 0h1"/></g></svg>
 <p>Sample reports</p><span>morsportsperformance.github.io/<br>mor-sports-performance</span></div>
   <div class="kicker rv">Contact</div>
-  <h2 class="rv">Send us your athletes.</h2>
+  <h2 class="rv">Think of one patient you can have a conversation with <span class="a">about our services.</span></h2>
   <div class="contact rv">
     <div><span>Email</span>spc@rushortho.com</div>
     <div><span>Phone</span>708-492-5782</div>
     <div><span>Web</span>rushortho.com/spc</div>
   </div>
   <p class="sub rv" style="font-size:44px">Patients can book in the Mindbody app: search <span style="white-space:nowrap">“Midwest Orthopaedics.”</span></p>
-  <h2 class="rv" style="margin-top:72px">Questions?</h2>
+  <h2 class="rv" style="margin-top:44px;font-size:64px">Questions?</h2>
 </section>
 
 </div></div>
