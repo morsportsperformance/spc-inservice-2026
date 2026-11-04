@@ -1080,7 +1080,7 @@ body.blanked .blank { display: block; }
     <div><span>Phone</span>708-492-5782</div>
     <div><span>Web</span>rushortho.com/spc</div>
   </div>
-  <p class="sub rv" style="font-size:44px">Patients can book in the Mindbody app: search “Midwest Orthopaedics.”</p>
+  <p class="sub rv" style="font-size:44px">Patients can book in the Mindbody app: search <span style="white-space:nowrap">“Midwest Orthopaedics.”</span></p>
   <h2 class="rv" style="margin-top:72px">Questions?</h2>
 </section>
 
@@ -5645,7 +5645,7 @@ version 0.6.9
     return { pose: { hip, knee, ankle, lean, arm, elbow: 15 }, up, contact: s < J.off || s >= J.land };
   };
   const cmj = slide && makeView(slide.querySelector('[data-fig="force-plates"]'), {
-    fov: 30, shift: 0.24, stackZoom: 0.7, duration: J.end, still: J.bottom + 0.25, fMax: 1.6, ref: 0.5, refLabel: 'HALF BODY WEIGHT', refShort: '½ BODY WT',
+    fov: 30, shift: 0.24, stackZoom: 0.7, duration: J.end, still: J.bottom + 0.25, fMax: 1.6, ref: 0.5, refLabel: 'HALF BODY WEIGHT', refShort: '½ BW',
     series: [{ color: LEFT_CSS, label: 'LEFT', force: forceL }, { color: RIGHT_CSS, label: 'RIGHT', force: forceR }],
     build(v) {
       // the character's left is +X: left plate blue, right plate orange
